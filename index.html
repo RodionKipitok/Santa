@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Рандомное Имя</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    #nameInput {
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    #shuffleButton {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    #randomName {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Рандомное Имя</h1>
+  <label for="nameInput">Введите имена (через запятую):</label>
+  <input type="text" id="nameInput" placeholder="Имя1, Имя2, Имя3">
+  <button id="shuffleButton" onclick="shuffleNames()">Перемешать</button>
+  <div id="randomName"></div>
+
+  <script>
+    function shuffleNames() {
+      const nameInput = document.getElementById('nameInput');
+      const randomNameDisplay = document.getElementById('randomName');
+
+      // Получаем имена из инпута и разбиваем их по запятой
+      const names = nameInput.value.split(',');
+
+      // Удаляем лишние пробелы в начале и конце каждого имени
+      const trimmedNames = names.map(name => name.trim());
+
+      // Перемешиваем имена
+      const shuffledNames = shuffleArray(trimmedNames);
+
+      // Выбираем случайное имя из перемешанного списка
+      const randomName = shuffledNames[Math.floor(Math.random() * shuffledNames.length)];
+
+      // Выводим случайное имя
+      randomNameDisplay.textContent = `Рандомное имя: ${randomName}`;
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+  </script>
+</body>
+</html>
